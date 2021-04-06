@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\trip;
 use Illuminate\Http\Request;
 
 class tripsController extends Controller
@@ -13,7 +14,8 @@ class tripsController extends Controller
     
     public function trips()
     {
-        return view('trips.trips');
+        $trips = trip::paginate();
+        return view('trips.trips', ['trips' => $trips]);
     }
 
     public function create()
