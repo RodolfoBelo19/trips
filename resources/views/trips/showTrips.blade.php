@@ -1,5 +1,5 @@
 @extends('layout.template')
-@section('title', 'home')
+@section('title', 'trips list')
 @section('content')
-    <h1>Página Home</h1>
+    <h1>trips list</h1>
 @endsection

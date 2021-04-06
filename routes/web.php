@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\tripsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [tripsController::class, 'index']);
+
+Route::get('trips', [tripsController::class, 'trips']);
+
+Route::get('trips/create', [tripsController::class, 'create']);
+
+Route::get('trips/edit', [tripsController::class, 'edit']);
+
+Route::get('trips/show', [tripsController::class, 'show']);
+
+
