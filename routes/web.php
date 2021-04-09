@@ -16,12 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [tripsController::class, 'index']);
 
-Route::get('trips', [tripsController::class, 'trips']);
+Route::get('trips', [tripsController::class, 'trips'])-> name('trips');
 
-Route::get('trips/create', [tripsController::class, 'create']);
+Route::post('trips', [tripsController::class, 'insert']) -> name('trips.insert');
 
-Route::get('trips/edit', [tripsController::class, 'edit']);
+Route::get('trips/create', [tripsController::class, 'create']) -> name('trips.create');
 
-Route::get('trips/show', [tripsController::class, 'show']);
+Route::get('trips/{trip}/edit', [tripsController::class, 'edit'])-> name('trips.edit');
+
+Route::get('trips/show/{id}', [tripsController::class, 'show'])-> name('trips.show');
+
+Route::put('trips/{trip}', [tripsController::class, 'editTrip']) -> name('trips.editTrip');
+
+Route::delete('trips/{trip}', [tripsController::class, 'delete']) -> name('trips.delete');
+
 
 

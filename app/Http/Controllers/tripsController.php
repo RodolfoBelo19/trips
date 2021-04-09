@@ -14,7 +14,7 @@ class tripsController extends Controller
     
     public function trips()
     {
-        $trips = trip::paginate();
+        $trips = trip::orderby('id', 'desc') -> paginate();
         return view('trips.trips', ['trips' => $trips]);
     }
 
@@ -23,13 +23,38 @@ class tripsController extends Controller
         return view('trips.createTrips');
     }
 
-    public function edit()
+    public function insert(Request $request)
     {
-        return view('trips.editTrips');
+        $trip = new trip();
+        $trip->name = $request->name;
+        $trip->origin = $request->origin;
+        $trip->destiny = $request->destiny;
+        $trip->cost = $request->cost;
+        $trip->save();
+        return redirect()->route('trips');
     }
 
-    public function show()
+    public function edit(trip $trip)
     {
-        return view('trips.showTrips');
+        return view('trips.editTrips', ['trip' => $trip]);
     }
+
+    public function editTrip(Request $request, trip $trip)
+    {
+        $trip->name = $request->name;
+        $trip->origin = $request->origin;
+        $trip->destiny = $request->destiny;
+        $trip->cost = $request->cost;
+        $trip->save();
+        return redirect()->route('trips');
+    }
+
+    public function show($id)
+    {
+        $trip = trip::find($id);
+        return view('trips.showTrips', ['trips' => $trip]);
+    }
+
+  
+
 }
